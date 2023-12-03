@@ -1,0 +1,214 @@
+{% extends 'layout.html' %} {% block content %}
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    </head>
+<body>
+<br>
+<h1 class="our-games-header" style="text-align:center">Our Games</h1>
+<br>
+<p id="browse-para">Click on the game title or image to view a detailed description of each game!</p>
+
+<header class="container">
+<!-- Search Form -->
+    <form method="GET" action="{{ url_for('search_bp.search_results') }}" class="search-form">
+        <input class="search-input" type="search" placeholder="Search" aria-label="Search" name="q">
+        <label class="search-label" for="search_type">Search By:</label>
+        <input type="radio" id="search_type_title" name="search_type" value="title" checked>
+        <label class="radio-label" for="search_type_title">Title</label>
+        <input type="radio" id="search_type_genre" name="search_type" value="genre">
+        <label class="radio-label" for="search_type_genre">Genre</label>
+        <input type="radio" id="search_type_publisher" name="search_type" value="publisher">
+        <label class="radio-label" for="search_type_publisher">Publisher</label>
+        <button class="search-button" type="submit">Search</button>
+    </form>
+</header>
+<br>
+
+
+<!-- Search Results Section -->
+<section id="search-results">
+{% if search_results %}
+<h2>Search Results</h2>
+<ul>
+    {% for game in search_results %}
+    <li>{{ game.title }} - {{ game.release_date }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<br>
+<br>
+
+</section>
+
+
+    <table>
+        <tbody>
+
+           <div class="game-card-container">
+                {% for game in games %}
+                <div class="game-card">
+                    <a href="{{ url_for('gameDescription_bp.game_description', game_id=game.game_id) }}">
+                        <img class="game-card-image" src="{{ game.image_url }}" alt="{{ game.title }} Image">
+                    </a>
+                    <div class="game-card-title">
+                        <a href="{{ url_for('gameDescription_bp.game_description', game_id=game.game_id) }}">{{ game.title }}</a>
+                    </div>
+                    <div class="game-card-details">
+                        Price: ${{ game.price }}<br>
+                        ID: {{ game.game_id }}<br>
+                        Release Date: {{ game.release_date }}<br>
+                        Publisher: {{ game.publisher }}<br>
+                    </div>
+                    <div class="game-card-genres">
+                        Genres: {{ game.genres }}
+                    </div>
+                    <br>
+                        <div class="wishlist-buttons">
+                            <form method="POST" action="{{ url_for('profile_bp.add_to_wishlist', game_id=game.game_id) }}">
+                                <button type="submit" class="search-button">Add to Wishlist</button>
+                            </form>
+{#                            <form method="POST" action="{{ url_for('profile_bp.remove_from_wishlist', game_id=game.game_id) }}">#}
+{#                                <button type="submit" class="search-button">Remove from Wishlist</button>#}
+{#                            </form>#}
+                        </div>
+                </div>
+                {% endfor %}
+            </div>
+
+        </tbody>
+    </table>
+</body>
+
+    <br><br>
+
+<footer>
+    <nav class="games-nav">
+        <div class="pave-nav">
+            {% if first_games_url %}
+            <button class="btn-general" onclick="location.href='{{first_games_url}}'">First</button>
+            {% else %}
+            <button class="btn btn-fill btn-disabled" disabled>First</button>
+            {% endif %}
+
+            {% if prev_games_url %}
+            <button class="btn-general" onclick="location.href='{{prev_games_url}}'">Previous</button>
+            {% else %}
+            <button class="btn btn-fill btn-disabled" disabled>Previous</button>
+            {% endif %}
+        </div>
+        <div class="page">
+            {{page+1}}
+        </div>
+        <div class="pave-nav">
+            {% if next_games_url %}
+            <button class="btn-general" onclick="location.href='{{next_games_url}}'">Next</button>
+            {% else %}
+            <button class="btn btn-fill btn-disabled" disabled>Next</button>
+            {% endif %}
+
+            {% if last_games_url %}
+            <button class="btn-general" onclick="location.href='{{last_games_url}}'">Last</button>
+            {% else %}
+            <button class="btn btn-fill btn-disabled" disabled>Last</button>
+            {% endif %}
+        </div>
+    </nav>
+<br>
+</footer>
+
+
+{#<script>#}
+{#    // Select all heart icon elements by class#}
+{#    const heartIcons = document.querySelectorAll('.heart-icon');#}
+{##}
+{#    // Add a click event listener to each heart icon#}
+{#    heartIcons.forEach(function (heartIcon) {#}
+{#        // Retrieve the game's ID from the heart icon's ID attribute#}
+{#        const gameId = heartIcon.id.replace('heart', '');#}
+{##}
+{#        // Check if the game was previously marked as 'liked'#}
+{#        const isLiked = localStorage.getItem(`liked_${gameId}`);#}
+{##}
+{#        // Update the heart icon based on the previous state#}
+{#        if (isLiked === 'true') {#}
+{#            heartIcon.querySelector('i').classList.add('fas');#}
+{#            heartIcon.classList.add('red');#}
+{#        }#}
+{##}
+{#        heartIcon.addEventListener('click', function () {#}
+{#            // Toggle the "fas" class to change the appearance#}
+{#            heartIcon.querySelector('i').classList.toggle('fas');#}
+{##}
+{#            // Toggle a custom "red" class to change the color#}
+{#            heartIcon.classList.toggle('red');#}
+{##}
+{#            // Save the like/dislike state in local storage#}
+{#            if (heartIcon.querySelector('i').classList.contains('fas')) {#}
+{#                localStorage.setItem(`liked_${gameId}`, 'true');#}
+{#            } else {#}
+{#                localStorage.removeItem(`liked_${gameId}`);#}
+{#            }#}
+{#        });#}
+{#    });#}
+{#</script>#}
+
+    <script>
+    // Add a click event listener to each heart icon
+    const heartIcons = document.querySelectorAll('.heart-icon');
+    heartIcons.forEach(function (heartIcon) {
+        // Retrieve the game's ID from the heart icon's ID attribute
+        const gameId = heartIcon.id.replace('heart', '');
+
+        // Check if the game was previously marked as 'liked'
+        const isLiked = localStorage.getItem(`liked_${gameId}`);
+
+        // Update the heart icon based on the previous state
+        if (isLiked === 'true') {
+            heartIcon.querySelector('i').classList.add('fas');
+            heartIcon.classList.add('red');
+        }
+
+        heartIcon.addEventListener('click', function () {
+            // Toggle the "fas" class to change the appearance
+            heartIcon.querySelector('i').classList.toggle('fas');
+
+            // Toggle a custom "red" class to change the color
+            heartIcon.classList.toggle('red');
+
+            // Save the like/dislike state in local storage
+            if (heartIcon.querySelector('i').classList.contains('fas')) {
+                localStorage.setItem(`liked_${gameId}`, 'true');
+
+                // Send an AJAX request to add the game to the wishlist
+                fetch(`/add_to_wishlist/${gameId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        // Handle the response, e.g., show a success message
+                        console.log(data.message);
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            } else {
+                localStorage.removeItem(`liked_${gameId}`);
+
+                // Send an AJAX request to remove the game from the wishlist
+                fetch(`/remove_from_wishlist/${gameId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        // Handle the response, e.g., show a success message
+                        console.log(data.message);
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            }
+        });
+    });
+</script>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+
+
+    <!-- Search Results Section -->
+    <section id="search-results">
+        <br>
+        <br>
+        <h1 id = "search-results-header">Search Results for "{{ search_query }}"</h1>
+        <br>
+        <br>
+        <br>
+        {% if results|length > 0 %}
+        <table>
+
+            <tbody>
+                <div class="game-card-container">
+                {% for game in results %}
+                <div class="game-card">
+                    <a href="{{ url_for('gameDescription_bp.game_description', game_id=game.game_id) }}">
+                        <img class="game-card-image" src="{{ game.image_url }}" alt="{{ game.title }} Image">
+                    </a>
+                    <div class="game-card-title">
+                        <a href="{{ url_for('gameDescription_bp.game_description', game_id=game.game_id) }}">{{ game.title }}</a>
+                    </div>
+                    <div class="game-card-details">
+                        Price: ${{ game.price }}<br>
+                        <br>
+                        ID: {{ game.game_id }}<br>
+                        Release Date: {{ game.release_date }}<br>
+                        Publisher: {{ game.publisher.publisher_name }}<br>
+                    </div>
+                    <div class="game-card-genres">
+                        Genres: {{ game.genre_names|replace("', '", ', ')|replace("['", '')|replace("']", '')|replace("<", '')|replace(">", '') }}
+                    </div>
+                    <br>
+                    <div class="wishlist-buttons">
+                        <form method="POST" action="{{ url_for('profile_bp.add_to_wishlist', game_id=game.game_id) }}">
+                            <button type="submit" class="search-button">Add to Wishlist</button>
+                        </form>
+{#                        <form method="POST" action="{{ url_for('profile_bp.remove_from_wishlist', game_id=game.game_id) }}">#}
+{#                            <button type="submit" class="search-button">Remove from Wishlist</button>#}
+{#                        </form>#}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            </tbody>
+        </table>
+        {% else %}
+        <h3>Sorry there are no results for your search. Please try again</h3>
+        {% endif %}
+    </section>
+
+    <!-- Add this within the <form> tag in search_results.html -->
+    <!-- ... (Other content or sections) ... -->
+{% endblock %}
+

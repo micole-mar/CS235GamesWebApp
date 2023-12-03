@@ -1,0 +1,237 @@
+{% extends 'layout.html' %} {% block content %}
+<head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    </head>
+    <div class="description">
+        <br>
+        <div class="game_photo">
+            <img src="{{ game.image_url }}" alt="{{ game.title }} Image">
+        </div>
+
+        <div class="content_container">
+            <h2>{{ game.title }}</h2>
+            <br><br>
+            <h3>About</h3>
+            {% for paragraph in game.description.split('\n') %}
+                <p>{{ paragraph }}</p>
+            {% endfor %}
+            <br>
+            <h3>Price:</h3>
+            <p>${{ game.price }}</p>
+            <br>
+            <h3>Release Date:</h3>
+            <p>{{ game.release_date }} </p>
+            <br>
+            <h3>Genres</h3>
+            <p>
+                {% for genre_name in game.genre_names %}
+                    {{ genre_name }}{% if not loop.last %}, {% endif %}
+                {% endfor %}
+            </p>
+            <br>
+
+            <h3>Developers</h3>
+                {% for developer in game.developers.split(',') %}
+                    <li>{{ developer.strip(" '[]\"") }}</li>
+                {% endfor %}
+            <br>
+
+            <h3>Publisher</h3>
+            <p>{{ game.publisher_name }}</p>
+
+        </div>
+
+        <br><br>
+
+        <!-- Slideshow container -->
+        <div class="slideshow-container">
+            <!-- Movie Slide -->
+            {% if game.movie_url %}
+                <div class="mySlides fade">
+                    <iframe src="{{ game.movie_url }}"></iframe>
+                </div>
+            {% endif %}
+
+            <!-- Screenshots -->
+            {% for screenshot in game.screenshots.split(',') %}
+                <div class="mySlides fade">
+                    <img src="{{ screenshot }}" alt="Screenshot" class="sc-image">
+                </div>
+            {% endfor %}
+
+            <!-- Navigation controls -->
+            <label class="prev" onclick="plusSlides(-1)">&#10094;</label>
+            <label class="next" onclick="plusSlides(1)">&#10095;</label>
+
+            <!-- Navigation dots -->
+            <div class="dot-container">
+                <!-- Movie Dot -->
+                {% if game.movie_url %}
+                    <span class="dot" onclick="currentSlide(1)"></span>
+                {% endif %}
+                {% for screenshot in game.screenshots.split(',') %}
+                    <span class="dot" onclick="currentSlide({{ loop.index + (game.movie_url is defined) }})"></span>
+                {% endfor %}
+            </div>
+        </div>
+
+
+        <div class="content_container">
+
+            <!-- Website URL -->
+            {% if game.website_url %}
+                <h3>Official Website</h3>
+                <a href="{{ game.website_url }}" target="_blank" class="hov_link">
+                    {{ game.website_url }} <i style='font-size:10px' class='fas'>&#xf105;</i>
+                </a>
+            {% endif %}
+
+            <br><br>
+
+            <!-- Player Modes -->
+            <h3>Player Modes</h3>
+            <ul class="player-modes">
+                {% for mode in game.player_modes.split(',') %}
+                    <li>{{ mode.strip(" '[]\"") }}</li>
+                {% endfor %}
+            </ul>
+
+            <br>
+
+            <!-- Supported Languages -->
+            <h3>Supported Languages:</h3>
+            {% for language_name in game.languages.split(',') %}
+                {{ language_name.strip(" '[]\"") }}{% if not loop.last %}, {% endif %}
+            {% endfor %}
+
+
+            <br><br>
+
+            <!-- System Requirements -->
+            <h3>Compatible Systems</h3>
+            <ul class="compatible-systems">
+                <li class="system">
+                    {% if game.windows %}
+                        <strong>Windows:</strong> Supported
+                        <i class="fab fa-windows {% if game.windows_supported %}dark-icon{% else %}light-icon{% endif %}"></i>
+                    {% else %}
+                        <strong>Windows:</strong> Not supported <i class="fab fa-windows light-icon"></i>
+                    {% endif %}
+                </li>
+
+                <li class="system">
+                    {% if game.mac %}
+                        <strong>Mac:</strong> Supported
+                        <i class="fab fa-apple {% if game.mac_supported %}dark-icon{% else %}light-icon{% endif %}"></i>
+                    {% else %}
+                        <strong>Mac:</strong> Not supported <i class="fab fa-apple light-icon"></i>
+                    {% endif %}
+                </li>
+
+                <li class="system">
+                    {% if game.linux %}
+                        <strong>Linux:</strong> Supported
+                        <i class="fab fa-linux {% if game.linux_supported %}dark-icon{% else %}light-icon{% endif %}"></i>
+                    {% else %}
+                        <strong>Linux:</strong> Not supported <i class="fab fa-linux light-icon"></i>
+                    {% endif %}
+                </li>
+            </ul>
+
+
+            <br>
+            <div class="reviews-recommendations">
+                <div class="reviews">
+                    <!-- reviews -->
+                    <h3>Reviews</h3>
+                </div>
+                <div class="recommendations">
+                    <!-- Recommendations -->
+                    <p><strong>Recommendations</strong> &#128077 {{ game.recommendations }}
+                    </p>
+                </div>
+            </div>
+
+            <ul class="reviews-list">
+                <button class="btn-general" onclick="location.href='{{ url_for('gameDescription_bp.review_on_games', game_id=game.game_id)}}'">Review</button>
+                {% set ns = namespace(total_ratings=0) %}
+
+                {% if game.reviews %}
+                    {% for review in game.reviews|reverse %}
+                        {% set ns.total_ratings = ns.total_ratings + review.rating %}
+
+
+                        <li class="review">
+                            <strong>{{ review.user.username }}:</strong> {{ review.comment }} <strong>({{ review.rating|string }}/5)</strong>
+                        </li>
+                    {% endfor %}
+                {% else %}
+                    <p>No reviews available</p>
+                {% endif %}
+
+            </ul>
+            {% if game.reviews|length > 0 %}
+                    <h3>Average Rating: {{ (ns.total_ratings / game.reviews|length)|round(2) }}/5</h3>
+                {% endif %}
+            <br>
+
+{#            <span class="heart-icon" id="heart{{ game.game_id }}"><i class="far fa-heart"></i></span>#}
+            <form method="POST" action="{{ url_for('profile_bp.add_to_wishlist', game_id=game.game_id) }}">
+                <button type="submit" class="search-button">Add to Wishlist</button>
+            </form>
+            <br>
+{#            <form method="POST" action="{{ url_for('profile_bp.remove_from_wishlist', game_id=game.game_id) }}">#}
+{#                <button type="submit" class="search-button">Remove from Wishlist</button>#}
+{#            </form>#}
+            <br><br>
+        </div>
+
+
+
+        <script>
+            var slideIndex = 1;
+            showSlides(slideIndex);
+
+            function plusSlides(n) {
+                showSlides(slideIndex += n);
+            }
+
+            function currentSlide(n) {
+                showSlides(slideIndex = n);
+            }
+
+            function showSlides(n) {
+                var i;
+                var slides = document.getElementsByClassName("mySlides");
+                var dots = document.getElementsByClassName("dot");
+                if (n > slides.length) {
+                    slideIndex = 1;
+                }
+                if (n < 1) {
+                    slideIndex = slides.length;
+                }
+                for (i = 0; i < slides.length; i++) {
+                    slides[i].style.display = "none";
+                }
+                for (i = 0; i < dots.length; i++) {
+                    dots[i].className = dots[i].className.replace(" active", "");
+                }
+                slides[slideIndex - 1].style.display = "block";
+                dots[slideIndex - 1].className += " active";
+            }
+
+            for (i = 0; i < dots.length; i++) {
+              dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " active";
+
+            window.addEventListener('load', function () {
+                showSlides(slideIndex);
+            });
+
+
+        </script>
+
+    </div>
+{% endblock %}

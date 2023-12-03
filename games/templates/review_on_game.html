@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<div class="review-container">
+    <h2>Write a Review</h2>
+    <form method="POST" class="review-form">
+        {{ form.hidden_tag() }} <!-- Include CSRF token for security -->
+
+        <div class="form-group">
+            {{ form.review.label }}
+            {{ form.review(size=20, class="form-control") }}
+        </div>
+
+        <div class="form-group">
+            {{ form.rating.label }}
+            {{ form.rating(class="form-control") }}
+        </div>
+
+        <div class="form-group">
+            {{ form.submit(class="btn btn-primary") }}
+        </div>
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,785 @@
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  color: black;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+#header {
+  padding: 60px;
+  background: #11495e;
+  border-bottom: 1px solid #e0e4e8;
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+}
+
+#content-2 {
+  height: 100vh;
+  margin-left: 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+}
+
+.copyright {
+  color: black;
+  font-size: 0.9em;
+}
+
+.description p i {
+    font-family: 'Gill Sans';
+    font-weight: bold;
+    font-size: 18px;
+    text-transform: uppercase;
+    color:darkslateblue
+    }
+
+.description img {
+        vertical-align: top;
+    }
+
+#nav {
+  width: 200px;
+  height: 100%;
+  background: #8de3fa;
+  padding: 30px 0px;
+  position: fixed;
+}
+
+.btn-nav {
+  padding: 10px;
+  border-bottom: 1px solid #bdb8d7;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  color: #0e024d;
+  display: block;
+  font-size: 22px;
+  text-align: center;
+  font-weight: bolder;
+  transition: background-color 0.3s ease;
+}
+
+.btn-nav:not(#logo-btn):hover {
+  background-color: #2ba5c5;
+  color: white;
+}
+
+#logo {
+  display: block;
+  margin: 0 auto;
+  width: 150px;
+}
+
+#sub-nav-header {
+  color: #0e024d;
+  text-align: left;
+  margin-top: 20px;
+  padding-left: 10px;
+  font-size: 22px;
+}
+
+/* for search form START */
+
+/* Center the Search Form and Header */
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+}
+
+.search-form {
+    margin-left: auto;
+}
+
+.header {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.search-input {
+    flex: 1;
+    padding: 10px;
+    border: 2px solid #2ba5c5;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.search-label {
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.radio-group {
+    display: flex;
+    align-items: center;
+}
+
+.radio-label {
+    font-size: 16px;
+    margin-right: 15px;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+input[type="radio"] + label {
+    position: relative;
+    padding-left: 20px;
+    cursor: pointer;
+}
+
+input[type="radio"] + label::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 10px;
+    height: 10px;
+    border: 2px solid #2ba5c5;
+    border-radius: 50%;
+    background-color: transparent;
+}
+
+input[type="radio"]:checked + label::before {
+    background-color: #2ba5c5;
+}
+
+.search-button {
+    background-color: #2ba5c5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+    background-color: #11748c;
+}
+
+/* for search form END */
+
+/* Style the wishlist buttons */
+.wishlist-buttons {
+    display: flex;
+    gap: 10px;
+}
+.wishlist-buttons .search-button {
+    padding: 8px 15px;
+    font-size: 14px;
+}
+
+/* for change pages START */
+
+
+.games-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-general {
+    background-color: #2ba5c5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 30px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 5px; /* Add some margin for spacing between buttons */
+}
+
+.btn-general:hover {
+    background-color: #11748c;
+}
+
+.btn-disabled {
+    background-color: #888888; /* Disabled button background color */
+    color: white; /* Disabled button text color */
+    cursor: not-allowed; /* Cursor style for disabled button */
+    transition: none; /* Remove transition on hover */
+    border: none;
+    border-radius: 5px;
+    padding: 10px 30px;
+    font-size: 16px;
+    margin: 5px;
+}
+
+.btn-general:hover {
+    background-color: #11748c;
+}
+
+.page {
+    margin: 0 20px;
+    font-size: larger;
+}
+
+
+/* for change pages END */
+
+/* for game desc START */
+
+
+.description h2 {
+  font-size: 35px;
+}
+
+.game_photo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.content_container {
+    margin-right: 12.5%;
+    margin-left: 12.5%;
+}
+
+.description img, .slideshow-container {
+    width: 75%;
+    height: auto;
+    margin: 0 auto;
+}
+
+/* Slideshow container */
+
+.sc-image {
+    width: auto;
+    max-height: 500px;
+    object-fit: cover;
+}
+
+.slideshow-container {
+    position: relative;
+    max-width: 100%;
+    margin: auto;
+}
+
+.slideshow-container iframe {
+    width: 100%;
+    object-fit: cover;
+    height: 500px;
+}
+
+.mySlides {
+    display: none;
+}
+
+.mySlides img {
+    width: 100%;
+    height: auto;
+}
+
+.input {
+    display: none;
+}
+
+/* Navigation controls */
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    cursor: pointer;
+}
+
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a background color */
+.prev:hover, .next:hover {
+    background-color: rgb(17, 73, 94);
+}
+
+/* Navigation dots */
+.dot-container {
+    text-align: center;
+    padding: 10px;
+}
+
+.dot {
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.dot.active {
+    background-color: #4d4f50;
+}
+
+
+.input:checked ~ .mySlides {
+    display: block;
+}
+
+.input:checked ~ .dot-container .dot {
+    background-color: #717171;
+}
+
+/* Hoverable link */
+.hov_link {
+    color: #30d7ca; /* Change the color to your desired hover color */
+    text-decoration: none;
+    transition: color 0.3s; /* Smooth transition for color change */
+}
+
+.hov_link:hover {
+    color: #00675f; /* Change to a different color for the hover effect */
+}
+
+.hov_link i {
+    color: #30d7ca;
+}
+.hov_link i:hover {
+    color: #00675f;
+}
+
+.compatible-systems {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    list-style-type: none;
+}
+
+.system {
+    flex-basis: calc(33.33% - 10px);
+    margin: 5px;
+    text-align: center;
+}
+
+.reviews-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.review {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f5f5f5; /* Default background color */
+}
+
+/* Alternate background color for odd lines */
+.review:nth-child(odd) {
+    background-color: #e0e0e0;
+}
+
+/* for game desc END */
+
+#homepage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.larger-heading {
+    font-size: 45px;
+    font-weight: bold;
+    text-decoration: underline;
+    color: #00675f;
+}
+
+.home-image {
+    width: 130%;
+    height: 120%;
+    margin-left: -15%;
+}
+
+/* Hello css code for search results page starts here */
+
+#search-results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+#search-results-header {
+    font-size: 40px;
+    font-weight: bold;
+    text-decoration: underline;
+    color: #00675f;
+
+}
+/* And css code for search results page ends here thank you*/
+
+.games-list{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+#genre-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+#genre-list-header{
+    font-size: 45px;
+    font-weight: bold;
+    text-decoration: underline;
+    color: #00675f;
+}
+#browse-para{
+    text-align: center;
+}
+
+#genre-name-underline{
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: underline;
+    color:  #30d7ca;
+}
+
+/* Reviews and Recommendations */
+.reviews-recommendations {
+    display: flex;
+    align-items: flex-start; /* Align the items at the start of the flex container */
+    flex-wrap: wrap; /* Allow items to wrap onto the next line if necessary */
+}
+
+.recommendations {
+    margin-left: auto; /* Push the "Recommendations" section to the right */
+    display: inline-block; /* Make the "Recommendations" section inline with the reviews header */
+}
+
+.heart-icon {
+    cursor: pointer;
+}
+
+.red .fas.fa-heart {
+    color: red;
+}
+
+/* Game Cards */
+.game-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* Container for game cards */
+.game-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* Game Cards */
+.game-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    background-color: #fff;
+    transition: transform 0.2s ease;
+    max-width: 300px;
+    height: 400px;
+}
+
+.game-card:hover {
+    transform: scale(1.05);
+}
+
+.game-card-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.game-card-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.game-card-details {
+    font-size: 16px;
+    color: #333;
+}
+
+.game-card-genres {
+    margin-top: 10px;
+}
+
+
+/* Center the form container on the page */
+.formcontainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 50vh;
+}
+
+.formcontents {
+    display: block;
+}
+
+/* Style the form */
+.formcontainer form {
+    width: 100%;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+    .formcontainer form {
+        width: 600px;
+    }
+}
+
+.formcontainer form h1.title {
+    font-size: 24px;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.formcontainer form .form-field {
+    margin-bottom: 15px;
+}
+
+.formcontainer form .form-field label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.formcontainer form .form-field input[type="text"],
+.formcontainer form .form-field input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #2ba5c5;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.formcontainer form .errors {
+    color: red;
+    margin-top: 10px;
+}
+
+.formcontainer form .errors ul {
+    padding-left: 20px;
+    list-style: disc;
+}
+
+.formcontainer form .errors li {
+    margin-top: 5px;
+}
+
+.submit {
+    background-color: #2ba5c5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 11px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit:hover {
+    background-color: #11748c;
+}
+
+
+/* user info section */
+
+#user-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+}
+.user-info-left {
+  display: flex;
+  align-items: center;
+  float: left;
+  width: 30%;
+  padding-left: 20%;
+  text-align: right;
+}
+
+.user-photo {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 3px solid #2ba5c5;
+  margin-right: 20px;
+}
+
+
+
+#user-info h2 {
+  font-size: 24px;
+  margin: 0;
+  color: #0e024d;
+}
+
+.user-info-right {
+  float: right;
+  width: 50%;
+  padding-left: 20px;
+}
+
+#user-info p {
+  font-size: 16px;
+  margin: 5px 0;
+  color: #333;
+}
+
+/* Style the profile buttons */
+#profile-buttons {
+    margin: 40px 0px;
+    padding: 15px;
+    text-align: center;
+    font-size: 20px;
+    background-color: #f2f2f2;
+}
+
+.profile-button {
+    cursor: pointer;
+    transition: color 0.3s ease;
+    text-align: center;
+    font-weight: bold;
+}
+
+.profile-button:hover {
+    color: #11748c; /* Change text color on hover */
+}
+
+/* #2ba5c5 */
+
+/* Apply existing styles to the review container */
+.review-container {
+    width: 60%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff; /* Apply a white background similar to the login page */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin-top: 60px;
+}
+
+/* Apply existing styles to the review form */
+.review-form {
+    background-color: #ffffff; /* Apply a white background similar to the login page */
+    border: 2px solid #2ba5c5; /* Apply a border similar to the login page */
+    padding: 40px;
+    border-radius: 5px;
+}
+
+/* Customize the form elements as needed */
+.review-form .form-control {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #2ba5c5;
+    border-radius: 5px;
+}
+
+.review-form .form-group {
+    padding: 15px;
+}
+
+/* Style the submit button */
+.review-form .btn-primary {
+    background-color: #2ba5c5; /* Use the same button color as the login page */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 11px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.review-form .btn-primary:hover {
+    background-color: #11748c; /* Change the button color on hover */
+}
+
+
+/* Reviewed Game Card Styles */
+.reviewed-game-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    background-color: #fff;
+    transition: transform 0.2s ease;
+    max-width: 300px;
+    width: 100%; /* Stretch the card to fit the container */
+    min-height: 300px; /* Define a minimum height to accommodate the review */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.reviewed-game-card:hover {
+    transform: scale(1.05);
+}
+
+/* Game Card Title Styles */
+.reviewed-game-card .game-card-title {
+    font-size: 20px; /* Reduce font size to fit */
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Game Card Image Styles */
+.reviewed-game-card .game-card-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    flex-grow: 1; /* Allow the image to grow to fill the remaining space */
+    object-fit: cover; /* Preserve aspect ratio and cover the container */
+}

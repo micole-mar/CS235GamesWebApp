@@ -1,0 +1,3 @@
+review_id,user_id,game_id,review_text,rating
+1,2,7940,'this game is so fun! everyone should try it!!',5
+2,1,7940,'I think this game is alright',2

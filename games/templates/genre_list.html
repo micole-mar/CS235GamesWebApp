@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Genre List
+{% endblock %}
+
+{% block content %}
+    <section id="genre-list">
+        <br>
+        <br>
+        <h1 id="genre-list-header">Genres</h1>
+        <br>
+        <p>Click on a genre to view games associated with that genre</p>
+        <br>
+        <br>
+        <ul>
+            {% for genre in genres_list %}
+                <li><a href="{{ url_for('genre_bp.genre_games', genre_name=genre.genre_name) }}" id="genre-name-underline">{{ genre.genre_name }}</a></li>
+                <br>
+                <br>
+            {% endfor %}
+        </ul>
+    </section>
+{% endblock %}

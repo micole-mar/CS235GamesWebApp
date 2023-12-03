@@ -1,0 +1,56 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div id="container">
+        <main id="main">
+            <div class="games-list">
+                <br>
+                <br>
+                <h1>{{ genre_name }} Games</h1>
+                <br>
+                <p>Click on the game title or image to view a detailed description of each game!</p>
+                <br>
+                <br>
+                
+                    <tbody>
+                    <div class="game-card-container">
+                        {% for game in games %}
+                        <div class="game-card">
+                            <a href="{{ url_for('gameDescription_bp.game_description', game_id=game.game_id) }}">
+                                <img class="game-card-image" src="{{ game.image_url }}" alt="{{ game.title }} Image">
+                            </a>
+                            <div class="game-card-title">
+                                <a href="{{ url_for('gameDescription_bp.game_description', game_id=game.game_id) }}">{{ game.title }}</a>
+                            </div>
+                            <div class="game-card-details">
+                                Price: ${{ game.price }}<br>
+                                <br>
+                                ID: {{ game.game_id }}<br>
+                                Release Date: {{ game.release_date }}<br>
+                                Publisher: {{ game.publisher.publisher_name }}<br>
+                            </div>
+                            <div class="game-card-genres">
+                                Genres: {{ game.genre_names|replace("', '", ', ')|replace("['", '')|replace("']", '')|replace("<", '')|replace(">", '') }}
+                            </div>
+                            <br>
+                            <div class="wishlist-buttons">
+                                <form method="POST" action="{{ url_for('profile_bp.add_to_wishlist', game_id=game.game_id) }}">
+                                    <button type="submit" class="search-button">Add to Wishlist</button>
+                                </form>
+{#                                <form method="POST" action="{{ url_for('profile_bp.remove_from_wishlist', game_id=game.game_id) }}">#}
+{#                                    <button type="submit" class="search-button">Remove from Wishlist</button>#}
+{#                                </form>#}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    </tbody>
+
+            </div>
+        </main>
+    </div>
+{% endblock %}
+f
+
+
+

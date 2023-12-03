@@ -1,0 +1,20 @@
+<nav id="nav">
+    <a class="btn-nav" id="logo-btn" href="{{ url_for('home_bp.home') }}"><img id="logo" src="{{ url_for('static', filename='gaming-logo.png') }}" /></a>
+
+    <h2 id="nav-header">
+        {% if 'username' in session %} Hello, {{ session['username'] }} {% endif %}
+    </h2>
+    <a class="btn-nav" href="{{ url_for('home_bp.home') }}">Home</a>
+    <a class="btn-nav" href="{{ url_for('profile_bp.user_profile') }}">Profile</a>
+
+    {% if 'username' not in session %}
+        <a class="btn-nav" href="{{ url_for('authentication_bp.register') }}">Register</a>
+        <a class="btn-nav" href="{{ url_for('authentication_bp.login') }}">Login</a>
+    {% else %}
+        <a class="btn-nav" href="{{ url_for('authentication_bp.logout') }}">Logout</a>
+    {% endif %}
+
+    <h3 id="sub-nav-header">Browse Games</h3>
+    <a class="btn-nav" href="{{ url_for('games_bp.browse_games') }}">All Games</a>
+    <a class="btn-nav" href="{{ url_for('genre_bp.genre_list') }}">By Genre</a>
+</nav>
